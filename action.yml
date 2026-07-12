@@ -1,0 +1,30 @@
+name: 'Package MicroPythonOS App'
+description: >
+  Builds a deterministic .mpk from a MicroPythonOS app folder (fixed
+  timestamps, sorted entries, stored/uncompressed, app folder first), per
+  docs.micropythonos.com/apps/bundling-apps/. Reusable by any MicroPythonOS
+  app repo -- app-dir just needs a MANIFEST.JSON whose "fullname" matches
+  the folder's own name.
+inputs:
+  app-dir:
+    description: 'Path to the app folder containing MANIFEST.JSON'
+    required: true
+outputs:
+  mpk-path:
+    description: 'Path to the built .mpk file'
+    value: ${{ steps.package.outputs.mpk-path }}
+branding:
+  icon: 'package'
+  color: 'blue'
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - id: package
+      shell: bash
+      run: |
+        OUT=$(python3 "${{ github.action_path }}/package_mpk.py" "${{ inputs.app-dir }}")
+        echo "mpk-path=$OUT" >> "$GITHUB_OUTPUT"
