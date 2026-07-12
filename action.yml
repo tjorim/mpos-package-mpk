@@ -1,10 +1,5 @@
 name: 'Package MicroPythonOS App'
-description: >
-  Builds a deterministic .mpk from a MicroPythonOS app folder (fixed
-  timestamps, sorted entries, stored/uncompressed, app folder first), per
-  docs.micropythonos.com/apps/bundling-apps/. Reusable by any MicroPythonOS
-  app repo -- app-dir just needs a MANIFEST.JSON whose "fullname" matches
-  the folder's own name.
+description: 'Builds a deterministic .mpk package for a MicroPythonOS app, per the official bundling-apps recipe.'
 inputs:
   app-dir:
     description: 'Path to the app folder containing MANIFEST.JSON'
