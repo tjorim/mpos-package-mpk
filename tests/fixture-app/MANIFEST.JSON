@@ -1,0 +1,21 @@
+{
+  "name": "Fixture App",
+  "publisher": "Test",
+  "short_description": "Fixture app used to test package_mpk.py",
+  "long_description": "A minimal MicroPythonOS app used only to verify this action's build output.",
+  "fullname": "fixture-app",
+  "version": "0.1.0",
+  "category": "utility",
+  "activities": [
+    {
+      "entrypoint": "fixture_app.py",
+      "classname": "FixtureApp",
+      "intent_filters": [
+        {
+          "action": "main",
+          "category": "launcher"
+        }
+      ]
+    }
+  ]
+}

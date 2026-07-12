@@ -29,6 +29,17 @@ doesn't depend on anything already set up in the calling workflow. Building
 itself is pure stdlib (`zipfile`) -- no external `zip`/`find`/`touch` tools,
 so it runs identically on Linux, macOS, and native Windows runners.
 
+## Testing
+
+`tests/` has both unit tests for `package_mpk.py` (built-mpk contents,
+determinism across two runs, the fullname/folder-name validation) and a
+`fixture-app/` used by CI to dogfood the action itself end-to-end, on
+Linux, macOS, and Windows runners. Run locally with:
+
+```
+python -m unittest discover tests
+```
+
 ## Why not just shell out to `zip -r`?
 
 An earlier version of this script shelled out to `find`/`touch`/`zip`

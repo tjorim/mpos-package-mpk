@@ -1,0 +1,33 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run unit tests
+        run: python -m unittest discover tests
+
+      - name: Build via the action itself (dogfooding)
+        id: build
+        uses: ./
+        with:
+          app-dir: tests/fixture-app
+
+      - name: Verify the action produced a file
+        shell: bash
+        run: test -f "${{ steps.build.outputs.mpk-path }}"
