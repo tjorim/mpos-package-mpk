@@ -1,0 +1,19 @@
+name: Update major version tag
+
+on:
+  release:
+    types: [released]
+
+permissions:
+  contents: write
+
+jobs:
+  update-major-tag:
+    runs-on: ubuntu-latest
+    steps:
+      # actions/publish-action has no tagged releases yet (alpha, internal-use
+      # disclaimer) -- pinned to a commit SHA rather than a floating branch.
+      - name: Update the major tag
+        uses: actions/publish-action@f7054ee0e452c088e99b7dbc53e96b34c2d55c1b
+        with:
+          source-tag: ${{ github.event.release.tag_name }}
